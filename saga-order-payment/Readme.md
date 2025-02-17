@@ -1,0 +1,7 @@
+docker-compose up -d
+mvn spring-boot:run in both payment and order
+
+place order
+
+curl -X POST "http://localhost:8080/orders/create?product=Laptop&amount=1000"
+
