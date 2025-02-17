@@ -1,4 +1,9 @@
+docker ps
+
 docker-compose up -d
+
+mvn clean install
+
 mvn spring-boot:run in both payment and order
 
 place order

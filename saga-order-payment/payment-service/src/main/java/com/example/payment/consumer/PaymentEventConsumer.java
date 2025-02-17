@@ -1,6 +1,6 @@
 package com.example.payment.consumer;
 
-import com.example.order.entity.Order;
+import com.example.payment.entity.Order;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
