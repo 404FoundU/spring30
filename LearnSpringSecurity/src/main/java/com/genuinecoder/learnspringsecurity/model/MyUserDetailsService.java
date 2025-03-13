@@ -10,30 +10,34 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class MyUserDetailService implements UserDetailsService {
+public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private MyUserRepository repository;
+    UserRepository userRepository;
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<MyUser> user = repository.findByUsername(username);
-        if (user.isPresent()) {
-            var userObj = user.get();
-            return User.builder()
-                    .username(userObj.getUsername())
-                    .password(userObj.getPassword())
-                    .roles(getRoles(userObj))
+        //        return null;
+        Optional<MyUser> myUserOptional = userRepository.findByUsername(username);
+        if (myUserOptional.isPresent()) {
+            MyUser myUser = myUserOptional.get();
+            var normalUser = User.withUsername(myUser.getUsername())
+                    .password(myUser.getPassword())
+                    .roles(getRoles(myUser))
                     .build();
         } else {
             throw new UsernameNotFoundException(username);
         }
+
+
     }
 
     private String[] getRoles(MyUser user) {
         if (user.getRole() == null) {
-            return new String[]{"USER"};
+            return null;
         }
         return user.getRole().split(",");
     }
+
 }

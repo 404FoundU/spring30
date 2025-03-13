@@ -4,22 +4,22 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import org.springframework.boot.autoconfigure.web.WebProperties;
 
 @Entity
 public class MyUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String username;
-    private String password;
-    private String role; //Eg: ADMIN,USER
+    long id;
+    String username;
+    String password;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -46,4 +46,6 @@ public class MyUser {
     public void setRole(String role) {
         this.role = role;
     }
+
+    String role; // ADMIN,USER stored as string
 }

@@ -11,6 +11,7 @@ public class ContentController {
     return "home";
   }
 
+  //http://localhost:8080/admin/home
   @GetMapping("/admin/home")
   public String handleAdminHome() {
     return "home_admin";
