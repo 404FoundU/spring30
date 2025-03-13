@@ -14,6 +14,8 @@ public class MyUser {
     long id;
     String username;
     String password;
+    String role; // ADMIN,USER stored as string
+
 
     public long getId() {
         return id;
@@ -47,5 +49,4 @@ public class MyUser {
         this.role = role;
     }
 
-    String role; // ADMIN,USER stored as string
 }

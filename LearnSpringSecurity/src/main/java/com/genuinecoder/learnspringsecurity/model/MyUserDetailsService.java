@@ -13,24 +13,22 @@ import java.util.Optional;
 public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
-    UserRepository userRepository;
+    MyUserRepositoy myUserRepositoy;
 
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //        return null;
-        Optional<MyUser> myUserOptional = userRepository.findByUsername(username);
+        Optional<MyUser> myUserOptional = myUserRepositoy.findByUsername(username);
         if (myUserOptional.isPresent()) {
             MyUser myUser = myUserOptional.get();
-            var normalUser = User.withUsername(myUser.getUsername())
+           return User.withUsername(myUser.getUsername())
                     .password(myUser.getPassword())
                     .roles(getRoles(myUser))
                     .build();
         } else {
             throw new UsernameNotFoundException(username);
         }
-
-
     }
 
     private String[] getRoles(MyUser user) {
@@ -38,6 +36,10 @@ public class MyUserDetailsService implements UserDetailsService {
             return null;
         }
         return user.getRole().split(",");
+    }
+
+    public MyUser addUser(MyUser myUser) {
+       return myUserRepositoy.save(myUser);
     }
 
 }
